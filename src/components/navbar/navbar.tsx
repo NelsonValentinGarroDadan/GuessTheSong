@@ -30,13 +30,13 @@ export default function Navbar() {
             <Link href="/" className={`text-text-light dark:text-text-dark ${isActive("/") ? "bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent" : ""} hover:text-transparent`}>
               Inicio
             </Link>
-            <Link href="/play" className={`text-text-light dark:text-text-dark ${isActive("/jugar") ? "bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent" : ""} hover:text-transparent`}>
+            <Link href="/play" className={`text-text-light dark:text-text-dark ${isActive("/play") ? "bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent" : ""} hover:text-transparent`}>
               Jugar
             </Link>
             <Link href="/ranking" className={`text-text-light dark:text-text-dark ${isActive("/ranking") ? "bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent" : ""} hover:text-transparent`}>
               Ranking
             </Link>
-            <Link href="/about" className={`text-text-light dark:text-text-dark ${isActive("/acerca") ? "bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent" : ""} hover:text-transparent`}>
+            <Link href="/about" className={`text-text-light dark:text-text-dark ${isActive("/about") ? "bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent" : ""} hover:text-transparent`}>
               Acerca de
             </Link>
           </div>
