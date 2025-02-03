@@ -6,7 +6,7 @@ import users from "./components/usersData";
 const Ranking = () => {
     const [artist, setArtist] = useState<string | null>(null);
     return(
-        <section className="flex justify-start h-full min-h-screen items-center flex-col bg-bg-muted-dark pt-5 px-6">
+        <section className="flex justify-start h-full pb-5 xl:pb-0 min-h-screen items-center flex-col bg-bg-muted-dark pt-5 px-6">
              <h1 className="text-purple-600 font-extrabold text-center text-3xl xl:text-5xl">
              Ranking de jugadores
             </h1>
