@@ -1,6 +1,8 @@
 type User = {
+    id:string,
+    email:string,
     name:string,
-    lastname:string,
+    lastName:string,
     maxScore:number,
 }
 

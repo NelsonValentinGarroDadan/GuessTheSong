@@ -1,11 +1,13 @@
 import React, { useCallback, useEffect } from "react";
 import { useState } from "react";
 import CardRanking from "./components/card/card";
-import users from "./components/usersData";
 import SearchBar from "../searchBar/searchBar";
 import { Artist } from "../../types/artist";
 import { fetchArtist } from "../searchBar/fetchArtist";
+import User from "../../types/user";
+import { FetchFirtsUsers } from "./components/fetchFirstUsers";
 const Ranking = () => {
+    const [users, setUsers] = useState<User[]>([]);
     const [search, setSearch] = useState<string >("");
     const [artist, setArtist] = useState<Artist | null>(null);
     const [arrayArtist, setArrayArtist] = useState<Artist[]>([]);
@@ -13,9 +15,18 @@ const Ranking = () => {
         const artistData = await fetchArtist(search);
         setArrayArtist(artistData);
     },[search])
+    const fetchFirstFiftyUsers = useCallback(async () => {
+        const response = await FetchFirtsUsers();
+        setUsers(response)
+    },[])
     useEffect(()=>{
         fetchArtistCallBack();
     },[search]);
+    useEffect(()=>{
+        if(!artist){
+            fetchFirstFiftyUsers();
+        }
+    },[artist])
     return(
         <section className="flex justify-start h-full pb-5 xl:pb-0 min-h-screen items-center flex-col bg-bg-muted-dark pt-5 px-6">
              <h1 className="text-purple-600 font-extrabold text-center text-3xl xl:text-5xl">
