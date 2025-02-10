@@ -1,23 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Autocomplete, TextField } from "@mui/material";
 import { useState } from "react";
+import { Artist } from "../../types/artist";
 
-const artists = ["Ariana Grande", "Ed Sheeran", "Taylor Swift", "The Weeknd", "Bad Bunny"]; // Esto debería venir de una API
-
-const ArtistSelector = ({ onSelect }: { onSelect: (artist: string | null) => void }) => {
-    const [selectedArtist, setSelectedArtist] = useState<string | null>(null);
+const SearchBar = ({ onSelect, artists , setSearch}: { onSelect: (artist: Artist | null) => void ,setSearch: (search: string) => void , artists:Artist[]}) => {
+    const [selectedArtist, setSelectedArtist] = useState<Artist | null>(null);
 
     return (
         <Autocomplete
             disablePortal
             options={artists}
             value={selectedArtist}
+            getOptionLabel={(option) => option.name}
+            onInputChange={(_, newInputValue) => setSearch(newInputValue)}
             onChange={(_, newValue) => {
                 setSelectedArtist(newValue);
                 onSelect(newValue);
             }}
             sx={{
-                width: 300,
+                width: '100%',
                 '& .MuiOutlinedInput-root': {
                     backgroundColor: 'transparent', 
                     color: 'rgb(147 ,51, 234)', 
@@ -28,6 +29,7 @@ const ArtistSelector = ({ onSelect }: { onSelect: (artist: string | null) => voi
             }}
             renderInput={(params) => (
                 <TextField
+                key={params.id}
                     {...params}
                     label="Seleccionar artista..."
                     variant="outlined"
@@ -58,4 +60,4 @@ const ArtistSelector = ({ onSelect }: { onSelect: (artist: string | null) => voi
     );
 };
 
-export default ArtistSelector;
+export default SearchBar;

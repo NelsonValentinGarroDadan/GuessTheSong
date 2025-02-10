@@ -1,10 +1,21 @@
-import React, { useEffect } from "react";
-import ArtistSelector from "../artistSelector/artisSelector";
+import React, { useCallback, useEffect } from "react";
 import { useState } from "react";
 import CardRanking from "./components/card/card";
 import users from "./components/usersData";
+import SearchBar from "../searchBar/searchBar";
+import { Artist } from "../../types/artist";
+import { fetchArtist } from "../searchBar/fetchArtist";
 const Ranking = () => {
-    const [artist, setArtist] = useState<string | null>(null);
+    const [search, setSearch] = useState<string >("");
+    const [artist, setArtist] = useState<Artist | null>(null);
+    const [arrayArtist, setArrayArtist] = useState<Artist[]>([]);
+    const fetchArtistCallBack = useCallback(async() => {
+        const artistData = await fetchArtist(search);
+        setArrayArtist(artistData);
+    },[search])
+    useEffect(()=>{
+        fetchArtistCallBack();
+    },[search]);
     return(
         <section className="flex justify-start h-full pb-5 xl:pb-0 min-h-screen items-center flex-col bg-bg-muted-dark pt-5 px-6">
              <h1 className="text-purple-600 font-extrabold text-center text-3xl xl:text-5xl">
@@ -17,7 +28,7 @@ const Ranking = () => {
 
             </p>
             <section className="flex justify-center items-center mt-10 relative flex-col w-full">
-                <ArtistSelector onSelect={setArtist}/>
+                <SearchBar onSelect={setArtist} setSearch={setSearch} artists={arrayArtist}/>
                 <div className="flex flex-col items-center mt-5 overflow-y-scroll lg:overflow-visible h-96 lg:h-auto w-full px-3 xl:px-40">
                     {users.map((user, index) => <CardRanking key={index} user={user} rank={index+1}/>)}
                 </div>
