@@ -22,16 +22,16 @@ export default function Navbar() {
             GuessTheSong
           </Typography>
           <div className="hidden md:flex space-x-4">
-            <Link to="/" className={`${isActive("/") ? " text-transparent" :"text-text-dark"} hover:text-transparent bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text`}>
+            <Link to="/" className={`${isActive("/") ? " text-transparent" :"text-text-dark"} transition-all ease-in-out duration-300 hover:text-transparent bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text`}>
               Inicio
             </Link>
-            <Link to="/play" className={`${isActive("/play") ? " text-transparent" :"text-text-dark"} hover:text-transparent bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text`}>
+            <Link to="/play" className={`${isActive("/play") ? " text-transparent" :"text-text-dark"} transition-all ease-in-out duration-300 hover:text-transparent bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text`}>
               Jugar
             </Link>
-            <Link to="/ranking" className={`${isActive("/ranking") ? " text-transparent" :"text-text-dark"} hover:text-transparent bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text`}>
+            <Link to="/ranking" className={`${isActive("/ranking") ? " text-transparent" :"text-text-dark"} transition-all ease-in-out duration-300 hover:text-transparent bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text`}>
               Ranking
             </Link>
-            <Link to="/about" className={`${isActive("/about") ? " text-transparent" :"text-text-dark"} hover:text-transparent bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text`}>
+            <Link to="/about" className={`${isActive("/about") ? " text-transparent" :"text-text-dark"} transition-all ease-in-out duration-300 hover:text-transparent bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text`}>
               Acerca de
             </Link>
           </div>
@@ -49,19 +49,19 @@ export default function Navbar() {
           </Typography>
           <div className="w-full flex justify-end absolute top-2 right-1">
             <IconButton color="inherit" onClick={handleDrawerToggle}>
-              <CloseIcon className="text-text-dark " />
+              <CloseIcon className="text-text-dark transition-all ease-in-out duration-300" />
             </IconButton>
           </div>
-            <Link to="/" onClick={handleDrawerToggle} className={`${isActive("/") ? " text-transparent" :"text-text-dark"} hover:text-transparent bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text`}>
+            <Link to="/" onClick={handleDrawerToggle} className={`${isActive("/") ? " text-transparent" :"text-text-dark"} transition-all ease-in-out duration-300 hover:text-transparent bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text`}>
               Inicio
             </Link>
-            <Link to="/play" onClick={handleDrawerToggle} className={`${isActive("/play") ? " text-transparent" :"text-text-dark"} hover:text-transparent bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text`}>
+            <Link to="/play" onClick={handleDrawerToggle} className={`${isActive("/play") ? " text-transparent" :"text-text-dark"} transition-all ease-in-out duration-300 hover:text-transparent bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text`}>
               Jugar
             </Link>
-            <Link to="/ranking" onClick={handleDrawerToggle} className={`${isActive("/ranking") ? " text-transparent" :"text-text-dark"} hover:text-transparent bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text`}>
+            <Link to="/ranking" onClick={handleDrawerToggle} className={`${isActive("/ranking") ? " text-transparent" :"text-text-dark"} transition-all ease-in-out duration-300 hover:text-transparent bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text`}>
               Ranking
             </Link>
-            <Link to="/about" onClick={handleDrawerToggle} className={`${isActive("/about") ? " text-transparent" :"text-text-dark"} hover:text-transparent bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text`}>
+            <Link to="/about" onClick={handleDrawerToggle} className={`${isActive("/about") ? " text-transparent" :"text-text-dark"} transition-all ease-in-out duration-300 hover:text-transparent bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text`}>
               Acerca de
             </Link>
         </div>

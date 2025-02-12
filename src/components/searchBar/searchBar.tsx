@@ -1,10 +1,19 @@
-import React, { useEffect } from "react";
-import { Autocomplete, TextField } from "@mui/material";
-import { useState } from "react";
+import React, { useState } from "react";
+import { Autocomplete, TextField, CircularProgress } from "@mui/material";
 import { Artist } from "../../types/artist";
 
-const SearchBar = ({ onSelect, artists , setSearch}: { onSelect: (artist: Artist | null) => void ,setSearch: (search: string) => void , artists:Artist[]}) => {
+const SearchBar = ({ onSelect, artists, setSearch }: { onSelect: (artist: Artist | null) => void, setSearch: (search: string) => void, artists: Artist[] }) => {
     const [selectedArtist, setSelectedArtist] = useState<Artist | null>(null);
+    const [loading, setLoading] = useState(false);
+
+    const handleSearch = async (searchValue: string) => {
+        setLoading(true);
+        setSearch(searchValue);
+        
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        
+        setLoading(false);
+    };
 
     return (
         <Autocomplete
@@ -12,47 +21,49 @@ const SearchBar = ({ onSelect, artists , setSearch}: { onSelect: (artist: Artist
             options={artists}
             value={selectedArtist}
             getOptionLabel={(option) => option.name}
-            onInputChange={(_, newInputValue) => setSearch(newInputValue)}
+            getOptionKey={(option) => option.id}
+            onInputChange={(_, newInputValue) => handleSearch(newInputValue)}
             onChange={(_, newValue) => {
                 setSelectedArtist(newValue);
                 onSelect(newValue);
             }}
             sx={{
                 width: '100%',
-                '& .MuiOutlinedInput-root': {
-                    backgroundColor: 'transparent', 
-                    color: 'rgb(147 ,51, 234)', 
-                    '& fieldset': {
-                        borderColor: 'rgb(147 ,51, 234)', 
-                    },
-                },
             }}
             renderInput={(params) => (
                 <TextField
-                key={params.id}
                     {...params}
                     label="Seleccionar artista..."
                     variant="outlined"
-                    sx={{ 
-                        backgroundColor: 'tranparent',
+                    sx={{
+                        backgroundColor: 'transparent',
                         '& .MuiInputLabel-root': {
-                            color: 'white', 
+                            color: 'white',
                         },
-                        '& .MuiFormLabel-root' : {
-                            color: 'rgb(147 ,51, 234)',
-                        }
-                        ,
-                        '& .MuiFormControl-root' : {
-                            borderColor: 'rgb(147 ,51, 234)',
-                        }
-                        ,
+                        '& .MuiFormLabel-root': {
+                            color: 'rgb(147, 51, 234)',
+                        },
+                        '& .MuiFormControl-root': {
+                            borderColor: 'rgb(147, 51, 234)',
+                        },
                         '& .MuiInputBase-root': {
                             color: 'white',
-                        }, '& .MuiSvgIcon-root':{
-                            color: 'rgb(147 ,51, 234)',
-                        }
-                        }
-                    }
+                        },
+                        '& .MuiSvgIcon-root': {
+                            color: 'rgb(147, 51, 234)',
+                        },
+                    }}
+                    slotProps={{
+                        input: {
+                            ...params.InputProps,
+                            endAdornment: (
+                                <>
+                                    {loading ? <CircularProgress color="inherit" size={20} /> : null}
+                                    {params.InputProps.endAdornment}
+                                </>
+                            ),
+                        },
+                    }}
                 />
             )}
             className="w-full max-w-md"

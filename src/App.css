@@ -3,7 +3,6 @@
 @tailwind utilities;
 
 *{
-    transition: all ease-in-out .3s;
     user-select: none;
     font-family: Roboto, sans-serif;
 }

@@ -6,25 +6,44 @@ import { Artist } from "../../types/artist";
 import { fetchArtist } from "../searchBar/fetchArtist";
 import User from "../../types/user";
 import { FetchFirtsUsers } from "./components/fetchFirstUsers";
+import { FetchUsersByArtist } from "./components/fetchUsersByArtist";
 const Ranking = () => {
     const [users, setUsers] = useState<User[]>([]);
     const [search, setSearch] = useState<string >("");
     const [artist, setArtist] = useState<Artist | null>(null);
     const [arrayArtist, setArrayArtist] = useState<Artist[]>([]);
+    const fetchUsersByArtistCallBack = useCallback(async ()=>{
+        if(artist){
+            const dataUsers = await FetchUsersByArtist(artist?.id);
+            setUsers(dataUsers);
+        }
+    },[artist])
     const fetchArtistCallBack = useCallback(async() => {
         const artistData = await fetchArtist(search);
-        setArrayArtist(artistData);
+        const uniqueArtists:Artist[] = Array.from(new Map(artistData.map(a => [a.id, a])).values());
+
+        if (artist) {
+            setArrayArtist(uniqueArtists.filter(a => a.id !== artist.id));
+        } else {
+            setArrayArtist(uniqueArtists);
+        }
     },[search])
     const fetchFirstFiftyUsers = useCallback(async () => {
         const response = await FetchFirtsUsers();
         setUsers(response)
     },[])
     useEffect(()=>{
-        fetchArtistCallBack();
+        if(search){
+            fetchArtistCallBack();
+        }else{
+            setArrayArtist([])
+        }
     },[search]);
     useEffect(()=>{
         if(!artist){
             fetchFirstFiftyUsers();
+        }else{
+            fetchUsersByArtistCallBack();
         }
     },[artist])
     return(
@@ -50,3 +69,4 @@ const Ranking = () => {
 }
 
 export default Ranking;
+
