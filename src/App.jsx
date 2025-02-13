@@ -5,6 +5,7 @@ import Home from './components/home/home'
 import Footer from './components/footer/footer'
 import About from './components/about/about'
 import Ranking from './components/ranking/ranking'
+import Auth from './components/auth/auth'
 function App() {
 
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/ranking" element={<Ranking />} />
+          <Route path="/auth" element={<Auth />} />
         </Routes>
       <Footer />
     </>
